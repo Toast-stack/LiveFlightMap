@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Flight Map</title>
+    <script>
+        function refreshMap() {
+            fetch('/update')  // Calls the server to update data
+                .then(response => response.text())
+                .then(data => {
+                    console.log(data);
+                    document.getElementById("map-frame").src = "/map?nocache=" + new Date().getTime();
+                });
+        }
+    </script>
+</head>
+<body>
+    <h1>Live Flight Map</h1>
+    <button onclick="refreshMap()">Update Map</button>
+    <iframe id="map-frame" src="/map?nocache=" width="100%" height="600"></iframe>
+</body>
+</html>
